@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pyutils"
+version = "0.1.0"
+description = "python utils"
+authors = ["winglechen <winglechen@gmail.com>"]
+license = "MIT License"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytest = "^7.2.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
