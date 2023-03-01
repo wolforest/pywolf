@@ -8,6 +8,7 @@ license = "MIT License"
 [tool.poetry.dependencies]
 python = "^3.10"
 pytest = "^7.2.1"
+boltons = "^23.0.0"
 
 [tool.poetry.dev-dependencies]
 
