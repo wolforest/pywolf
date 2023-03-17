@@ -2,8 +2,6 @@
 import boltons.typeutils as butils
 
 
-
-
 def make_sentinel(name='_MISSING', var_name=None):
     """
     Creates and returns a new **instance** of a new class, suitable for
