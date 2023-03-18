@@ -5,12 +5,8 @@ description = "python utils"
 authors = ["winglechen <winglechen@gmail.com>"]
 license = "MIT License"
 packages = [
-    {include = "bin"},
-    {include = "bin/**/*.py"},
     {include = "pywolf"},
-    {include = "pywolf/**/*.py"},
-    {include = "tests"},
-    {include = "tests/**/*.py"},
+    {include = "bin/**/*.py"},
 ]
 
 [tool.poetry.dependencies]
