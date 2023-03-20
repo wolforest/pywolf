@@ -1,7 +1,6 @@
 wolf:
   # env setting
   env: test
-  include: ext1, ext2
   db:
     host: ahost
     port: aport
