@@ -1,21 +1,35 @@
 
-class ApplicationContext(dict):
-    def __init__():
+from pywolf.application.bootstrap import Bootstrap
+from pywolf.application.config import Config
+
+class ApplicationContext():
+
+    def __init__(self):
+        self.context = {}
         pass
 
-    def setRootPath(self, path):
+    def bootstrap(self, path):
         self.rootPath = path
-        self.bootstrap()
 
-    def getRootPath(self):
+        Bootstrap().boot(self)
+        
+    def set_config(self, config: Config):
+        self.context['config'] = config
+
+    def get_config(self) -> Config:
+        return self.context.get('config')
+
+    def set_root_path(self, path):
+        self.rootPath = path
+
+    def get_root_path(self):
         return self.rootPath
 
-    def bootstrap(self):
-        pass
-
     def get(self, key):
-        pass
+        return self.context.get(key)
 
 
-app=appContext=applicationContext = new ApplicationContext()
+
+applicationContext = ApplicationContext()
+app= applicationContext
 
