@@ -31,5 +31,5 @@ class ApplicationContext():
 
 
 applicationContext = ApplicationContext()
-app= applicationContext
+context = applicationContext
 
