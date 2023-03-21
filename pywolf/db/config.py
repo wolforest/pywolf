@@ -11,7 +11,7 @@ class Validator(object):
             if not isinstance(v, dict):
                 return False
             
-            if not v['url']:
+            if "url" not in v:
                 return False
             
         return True
