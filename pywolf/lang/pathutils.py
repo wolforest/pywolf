@@ -4,7 +4,7 @@ import os
 all path returned will have '/' or '\\' suffix
 '''
 
-def current(file):
+def dirname(file):
     return os.path.dirname(os.path.abspath(file)) + os.sep
 
 
