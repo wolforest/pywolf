@@ -1,8 +1,0 @@
-wolf:
-  # env setting
-  env: test
-  db:
-    host: ahost
-    port: aport
-    user: xxx
-    pass: xxx
