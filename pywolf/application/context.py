@@ -6,12 +6,6 @@ class ApplicationContext():
 
     def __init__(self):
         self.context = {}
-        pass
-
-    def bootstrap(self, path):
-        self.rootPath = path
-
-        Bootstrap().boot(self)
         
     def set_config(self, config: Config):
         self.context['config'] = config
