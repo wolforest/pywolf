@@ -1,3 +1,5 @@
+import pytest 
+
 from pywolf.lang import fileutils 
 
 
@@ -10,7 +12,6 @@ def test_write_contents():
     with open(filename, "r") as f:
         fileContents = f.read()
 
-    print(fileContents)
     assert contents == fileContents
 
 
