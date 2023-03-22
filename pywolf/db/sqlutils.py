@@ -30,10 +30,9 @@ def build_insert_sql(table: str, values) -> str:
     first_row = get_first_insert_row(values)
     columns = first_row.keys()
 
-    sql = 'INSERT INTO '. join(
-        table, 
-        '(', join_columns(columns), ')',
-        ' values (', join_values(columns) , ')')
+    sql  = 'INSERT INTO ' + table 
+    sql += ' (' +  join_columns(columns) +  ')' 
+    sql += ' values (' + join_values(columns) + ')'
     
     return sql
 
