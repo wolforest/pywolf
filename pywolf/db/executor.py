@@ -11,9 +11,9 @@ class Executor(object):
             raise SystemError('invalid sql: ' + sql)
         
         if sqlutils.is_select(sql):
-            return await self.select(sql)
+            return await self.select(sql, values)
 
-        resp = await self.conn.execute(sql)
+        resp = await self.conn.execute(sql, values)
         if not resp:
             return Result.from_affected_rows(0)
 

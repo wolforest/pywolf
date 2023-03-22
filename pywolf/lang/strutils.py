@@ -1,5 +1,5 @@
 
-def startsWith(s: str, prefix: str, ignore_case: bool = True) -> bool:
+def starts_with(s: str, prefix: str, ignore_case: bool = True) -> bool:
     sLen: int = len(str)
     pLen: int = len(prefix)
     if sLen < pLen:
