@@ -12,7 +12,7 @@ def is_delete(sql: str) -> bool:
 def is_insert(sql: str) -> bool:
     return strutils.starts_with(sql, "insert")
 
-def get_first_insert_row(values):
+def get_first_insert_row(values) -> dict:
     if not values:
         raise SyntaxError('invalid insert values')
 
@@ -23,14 +23,19 @@ def get_first_insert_row(values):
     else :
         raise SyntaxError('invalid insert values')
 
-def build_insert_sql(table: str, values):
+def build_insert_sql(table: str, values) -> str:
     if not table or not values:
         raise SyntaxError('invalid insert syntax')
     
     first_row = get_first_insert_row(values)
     columns = first_row.keys()
 
-    sql = 'INSERT INTO '. join(table, '(', ') values (', ')')
+    sql = 'INSERT INTO '. join(
+        table, 
+        '(', join_columns(columns), ')',
+        ' values (', join_values(columns) , ')')
+    
+    return sql
 
 
 def join_columns(columns: list) -> str:
