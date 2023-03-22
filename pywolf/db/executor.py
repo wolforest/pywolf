@@ -39,3 +39,7 @@ class Executor(object):
                 return Result.from_count(count)
 
         return Result.from_rows(resp)
+
+    async def count(self, sql: str, values:dict=None) -> int:
+        result = await self.select(sql, values)
+        return result.get_count()
