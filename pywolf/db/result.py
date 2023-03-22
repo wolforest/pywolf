@@ -13,6 +13,10 @@ class Result:
     def from_row(row):
         return Result().set_row(row)
     
+    @staticmethod
+    def from_last_id(row):
+        return Result().set_row(row)
+    
     def __init__(self) -> None:
         self.data = []
 
@@ -29,6 +33,10 @@ class Result:
 
         self.data.append(row)
         return self
+
+    def set_last_id(self, id):
+        self.last_id = id
+        return self 
 
     def set_count(self, count):
         self.count = count
@@ -49,6 +57,9 @@ class Result:
             return {}
         
         return self.data[0]
+
+    def get_last_id(self, id):
+        return self.last_id 
 
     def get_affected_rows(self) -> int:
         return self.affected_rows
