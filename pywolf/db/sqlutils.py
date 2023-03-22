@@ -44,4 +44,22 @@ def join_values(columns: list) -> str:
     return ':' + ', :'.join(columns)
 
 
- 
+def get_count_from_response(resp) -> int:
+    '''
+        get count(*), count(*) as count value from db response
+    '''
+    if not isinstance(resp, list):
+        return -1
+    
+    if 1 != len(resp):
+        return -1
+    
+    row = resp[0]
+    if 'count(*)' in row:
+        return row['count(*)']
+
+    if 'count' in row:
+        return row['count']
+
+
+    return -1

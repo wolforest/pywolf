@@ -6,19 +6,26 @@ class Result:
         return Result().set_affected_rows(affected_rows)
 
     @staticmethod
-    def from_rows(rows, count=-1):
-        return Result().set_rows(rows).set_count(count)
+    def from_rows(rows):
+        return Result().set_rows(rows)
     
     @staticmethod
     def from_row(row):
         return Result().set_row(row)
     
     @staticmethod
-    def from_last_id(row):
-        return Result().set_row(row)
+    def from_last_id(id):
+        return Result().set_last_id(id)
+
+    @staticmethod
+    def from_count(count):
+        return Result().set_count(count)
     
     def __init__(self) -> None:
         self.data = []
+        self.affected_rows = 0
+        self.count = 0
+        self.last_id = 0
 
     def set_rows(self, rows):
         if not isinstance(rows, list):
@@ -58,7 +65,7 @@ class Result:
         
         return self.data[0]
 
-    def get_last_id(self, id):
+    def get_last_id(self):
         return self.last_id 
 
     def get_affected_rows(self) -> int:
