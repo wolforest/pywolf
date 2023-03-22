@@ -1,36 +1,63 @@
 
 
 class Result:
-    def __init__(self, rows=None, count=0, affect_rows=0, row=None):
-        pass
+    @staticmethod
+    def from_affected_rows(affected_rows):
+        return Result().set_affected_rows(affected_rows)
+
+    @staticmethod
+    def from_rows(rows, count=-1):
+        return Result().set_rows(rows).set_count(count)
+    
+    @staticmethod
+    def from_row(row):
+        return Result().set_row(row)
+    
+    def __init__(self) -> None:
+        self.data = []
 
     def set_rows(self, rows):
-        self.rows = rows
+        if not isinstance(rows, list):
+            raise SyntaxError('invalid db.result.rows format')
+
+        self.data.append(rows)
         return self
 
     def set_row(self, row):
-        self.row = row
+        if not isinstance(row, dict):
+            raise SyntaxError('invalid db.result.row format')
+
+        self.data.append(row)
         return self
 
     def set_count(self, count):
         self.count = count
         return self  
 
-    def set_affect_rows(self, affect_rows):
-        self.affect_rows = affect_rows
+    def set_affected_rows(self, affected_rows):
+        self.affected_rows = affected_rows
         return self  
     
     def get_count(self) -> int:
-        return 0
+        return self.count
 
     def get_rows(self) -> list:
-        return []
+        return self.data
 
     def get_row(self) -> dict:
-        return {}
+        if len(self.data) < 1:
+            return {}
+        
+        return self.data[0]
 
-    def get_affect_rows(self) -> int:
-        return 0
+    def get_affected_rows(self) -> int:
+        return self.affected_rows
     
     def get_cloumn(self, column):
-        return None
+        if len(self.data) < 1:
+            return None
+        
+        if column not in self.data[0]:
+            return None
+        
+        return self.data[0].get(column)
