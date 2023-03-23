@@ -3,13 +3,12 @@ import asyncio
 from pywolf.application.bootstrap import Bootstrap
 from pywolf.application.context import context
 
+
 class Application(object):
 
     def bootstrap(self, path):
         context.set_application(self)
-        context.set_root_path(path)
-
-        Bootstrap().boot(context)
+        Bootstrap().boot(path)
 
         return self
 
@@ -17,7 +16,7 @@ class Application(object):
         if not main:
             return
 
-        asyncio.run(main, args, debug)
+        asyncio.run(main)
 
 
 

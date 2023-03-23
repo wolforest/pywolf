@@ -1,14 +1,12 @@
 
-from pywolf.application.bootstrap import Bootstrap
 from pywolf.application.config import Config
-from pywolf.application.application import Application
-
 class ApplicationContext():
 
     def __init__(self):
         self.context = {}
 
-    def set_application(self, app: Application):
+
+    def set_application(self, app):
         self.app = app
         return self
         
@@ -20,7 +18,11 @@ class ApplicationContext():
         return self
 
     def get_config(self) -> Config:
-        return self.context.get('config')
+        config = self.context.get('config')
+        if not config:
+            raise SystemError('config has not been set')
+        
+        return config
 
     def set_root_path(self, path):
         self.rootPath = path
