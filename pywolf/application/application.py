@@ -21,5 +21,5 @@ class Application(object):
 
 
 
-if __name__=='__main__':
-    Application().bootstrap('./').run(None)
+# if __name__=='__main__':
+#     Application().bootstrap('./').run(None)
