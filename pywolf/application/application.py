@@ -5,12 +5,9 @@ from pywolf.application.context import context
 
 
 class Application(object):
-
-    def bootstrap(self, path):
+    def __init__(self, path):
         context.set_application(self)
         Bootstrap().boot(path)
-
-        return self
 
     def run(main, args, debug=None):
         if not main:

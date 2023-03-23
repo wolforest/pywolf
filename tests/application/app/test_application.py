@@ -14,7 +14,8 @@ async def main():
 
 def test_app_flow():
     app_path = pathutils.dirname(__file__)
-    Application().bootstrap(app_path)
+    Application(app_path)
+    # .run(main())
 
     conf = context.get_config()
     assert 'name_in_test_env' == conf.get('wolf.name')
