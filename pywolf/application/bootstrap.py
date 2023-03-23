@@ -1,3 +1,5 @@
+import logging
+
 from pywolf.application.config import Config
 from pywolf.application.context import context
 
@@ -9,6 +11,7 @@ class Bootstrap(object):
         context.set_root_path(path)
 
         self.load_config()
+        self.init_logging_config()
         self.init_db_config()
 
 
@@ -17,6 +20,10 @@ class Bootstrap(object):
         config = Config(config_path).load()
 
         context.set_config(config)
+
+    def init_logging_config(self):
+        logging.basicConfig(level=logging.INFO)
+
 
     def init_db_config(self):
         db_config = context.get_config().get('wolf.db')
