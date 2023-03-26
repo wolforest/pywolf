@@ -5,11 +5,11 @@ from pywolf.lang import pathutils
 from pywolf.application.application import Application
 from pywolf.application.context import context
 
+
 async def main():
     print('test application start ...')
     await asyncio.sleep(1)
     print('test application stoped')
-    
 
 
 def test_app_flow():

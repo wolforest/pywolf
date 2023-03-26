@@ -10,8 +10,8 @@ def test_write_contents():
     fileutils.write_contents(filename, contents)
 
     with open(filename, "r") as f:
-        fileContents = f.read()
+        file_contents = f.read()
 
-    assert contents == fileContents
+    assert contents == file_contents
 
 

@@ -71,7 +71,7 @@ class Result:
     def get_affected_rows(self) -> int:
         return self.affected_rows
     
-    def get_cloumn(self, column):
+    def get_column(self, column):
         if len(self.data) < 1:
             return None
         

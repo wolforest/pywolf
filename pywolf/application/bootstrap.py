@@ -5,6 +5,7 @@ from pywolf.application.context import context
 
 from pywolf.db.db import db
 
+
 class Bootstrap(object):
 
     def boot(self, path):
@@ -13,7 +14,6 @@ class Bootstrap(object):
         self.load_config()
         self.init_logging_config()
         self.init_db_config()
-
 
     def load_config(self):
         config_path = context.get_root_path() + 'config/'
@@ -24,10 +24,9 @@ class Bootstrap(object):
     def init_logging_config(self):
         logging.basicConfig(level=logging.INFO)
 
-
     def init_db_config(self):
         db_config = context.get_config().get('wolf.db')
         if not db_config:
             return
-        
+
         db.init_config(db_config)
