@@ -1,7 +1,4 @@
 import os
-import pytest
-
-import boltons.fileutils as butils
 
 
 def write_contents(file: str, contents):

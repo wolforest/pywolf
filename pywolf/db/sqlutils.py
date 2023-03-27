@@ -34,12 +34,9 @@ def build_insert_sql(table: str, values) -> str:
         raise SyntaxError('invalid insert syntax')
 
     first_row = get_first_insert_row(values)
-    columns = first_row.keys()
+    columns = list(first_row.keys())
 
-    sql = 'INSERT INTO ' + table
-    sql += ' (' + join_columns(columns) + ')'
-    sql += ' values (' + join_values(columns) + ')'
-
+    sql = f'INSERT INTO {table} ({join_columns(columns)}) values ({join_values(columns)})'
     return sql
 
 
