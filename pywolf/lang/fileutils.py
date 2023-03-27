@@ -4,8 +4,20 @@ import pytest
 import boltons.fileutils as butils
 
 
-def write_contents(file: str, contents: str):
+def write_contents(file: str, contents):
+    if isinstance(contents, str):
+        return write_string(file, contents)
+    elif isinstance(contents, bytes):
+        return write_bytes(file, contents)
+    
+    raise SyntaxError("Can not write contents other than str or bytes")
+
+def write_string(file: str, contents):
     with open(file, "w+") as f:
+        f.write(contents)
+
+def write_bytes(file: str, contents: bytes):
+    with open(file, "wb+") as f:
         f.write(contents)
 
 def append_contents(file: str, contents: str):
