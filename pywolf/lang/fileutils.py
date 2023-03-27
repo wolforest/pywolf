@@ -28,7 +28,7 @@ def append_contents(file: str, contents: str):
         f.write(contents)
 
 
-def read_contents(file: str) -> list:
+def read_contents(file: str) -> str:
     if not exists(file):
         raise FileExistsError(file + " not exists")
 
