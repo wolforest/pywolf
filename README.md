@@ -1,2 +1,6 @@
 # pyutils
-python utils 
+python framework:
+* application support
+    * context support
+    * config support
+* utils
