@@ -9,7 +9,7 @@ class Application(object):
         context.set_application(self)
         Bootstrap().boot(path)
 
-    def run(main, args, debug=None):
+    def run(self, main, args, debug=None):
         if not main:
             return
 
