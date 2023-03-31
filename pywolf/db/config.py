@@ -1,5 +1,6 @@
 class Validator(object):
-    def validate(self, config: dict) -> bool:
+    @staticmethod
+    def validate(config: dict) -> bool:
         if not config:
             return False
 

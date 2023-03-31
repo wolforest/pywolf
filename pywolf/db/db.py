@@ -10,7 +10,7 @@ class Db(object):
         self.config = None
 
     def init_config(self, config: dict):
-        if not Validator().validate(dict):
+        if not Validator.validate(config):
             raise SyntaxError("invalid database config")
 
         self.config = config
@@ -22,7 +22,7 @@ class Db(object):
             return Executor(conn)
 
         if dbname not in self.config:
-            raise SyntaxError('db connection: ' + dbname + ' doesn\'t exists')
+            raise SyntaxError(f'db connection: {dbname} does not exists')
 
         conn = Database(self.config.get(dbname).get('url'))
         await conn.connect()
