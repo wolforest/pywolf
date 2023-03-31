@@ -1,0 +1,6 @@
+wolf:
+  cache:
+    default:
+      url: 'engine://username:password@localhost:123/database'
+    db2:
+      url: 'mysql+aiomysql://username:password@localhost:123/database'

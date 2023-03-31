@@ -1,6 +1,6 @@
 wolf:
   db:
-    db1:
+    default:
       url: 'mysql+aiomysql://username:password@localhost:123/mydatabase'
     db2:
       url: 'mysql+aiomysql://username:password@localhost:123/mydatabase'
