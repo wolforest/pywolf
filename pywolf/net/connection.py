@@ -1,10 +1,15 @@
-from urllib.parse import urlparse, ParseResult
+from urllib.parse import urlparse
 
 
-class Connection(ParseResult):
-    database: str = None
-    engine: str = None
-    url: str = None
+class ConnectionUrl(object):
+    url: str = ''
+    engine: str = ''
+    username: str = ''
+    password: str = ''
+    hostname: str = ''
+    port: int = None
+    database: str = ''
+    query: str = ''
 
     def __init__(self, url: str):
         if not url:
@@ -12,13 +17,25 @@ class Connection(ParseResult):
 
         self.url = url
         result = urlparse(url)
-        super().__init__(result.scheme)
 
-        self.engine = result.scheme
-        self.username = result.username
-        self.password = result.password
-        self.hostname = result.hostname
-        self.port = result.port
+        if result.scheme:
+            self.engine = result.scheme
+
+        if result.username:
+            self.username = result.username
+
+        if result.password:
+            self.password = result.password
+
+        if result.hostname:
+            self.hostname = result.hostname
+
+        if result.port:
+            self.port = result.port
+
+        if result.query:
+            self.query = result.query
+
         self.init_database(result.path)
 
     def init_database(self, path: str):
