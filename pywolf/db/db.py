@@ -6,7 +6,7 @@ from pywolf.db.executor import Executor
 
 class Db(object):
     def __init__(self):
-        self.conn_dict = None
+        self.conn_dict = {}
         self.config = None
 
     def init_config(self, config: dict):
@@ -14,7 +14,6 @@ class Db(object):
             raise SyntaxError("invalid database config")
 
         self.config = config
-        self.conn_dict = {}
 
     async def connect(self, dbname: str = 'default'):
         if dbname in self.conn_dict:
