@@ -1,4 +1,4 @@
-from pywolf.lang import typeutils
+from pywolf.utils import typeutils
 
 import pytest
 

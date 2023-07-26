@@ -1,4 +1,4 @@
-from pywolf.lang import strutils
+from pywolf.utils import strutils
 
 
 def is_select(sql: str) -> bool:

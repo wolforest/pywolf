@@ -1,6 +1,6 @@
 import pytest 
 
-from pywolf.lang import fileutils 
+from pywolf.utils import fileutils 
 
 
 def test_write_contents():

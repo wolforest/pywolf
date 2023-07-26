@@ -1,7 +1,7 @@
 import pytest
 import os
 
-from pywolf.lang import pathutils
+from pywolf.utils import pathutils
 from pywolf.application.config import Config
 
 

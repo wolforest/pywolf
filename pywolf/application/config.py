@@ -1,6 +1,6 @@
 import yaml
 
-from pywolf.lang import fileutils
+from pywolf.utils import fileutils
 
 
 class Config(object):

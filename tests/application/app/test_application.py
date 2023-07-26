@@ -1,7 +1,7 @@
 import pytest
 import asyncio
 
-from pywolf.lang import pathutils
+from pywolf.utils import pathutils
 from pywolf.application.application import Application
 from pywolf.application.context import context
 
