@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pywolf"
-version = "0.3.3"
+version = "0.3.4"
 description = "python utils"
 authors = ["winglechen <winglechen@gmail.com>"]
 license = "MIT License"
