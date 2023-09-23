@@ -12,7 +12,7 @@ class TrieNode:
         self.children = {}
         self.counter = 0
     
-    def add_children(self, node) -> Self:
+    def add_child(self, node) -> Self:
         self.children[node.char] = node
         self.counter += 1
 
@@ -66,7 +66,7 @@ class Trie:
             return node.children[char]
         
         newNode = TrieNode(char)
-        node.add_children(newNode)
+        node.add_child(newNode)
 
         return newNode
 
