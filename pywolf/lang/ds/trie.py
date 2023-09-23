@@ -34,7 +34,7 @@ class Trie:
         node.isLeaf = True
         return self
 
-    def match(self, word:str) -> bool:
+    def exists(self, word:str) -> bool:
         node: TrieNode = self.root
 
         for char in word:
@@ -59,8 +59,6 @@ class Trie:
         self._deep_first_traverse(output, node, prefix[:-1])
 
         return output
-        
-    
 
     ########## private methods begin ##########
     def _insert_char(self, node: TrieNode, char: str) -> TrieNode:
@@ -82,9 +80,18 @@ class Trie:
         word = prefix + node.char
         if node.isLeaf:
             output.append((word, node.counter))
-            return
         
         for child in node.children.values():
             self._deep_first_traverse(output, child, word)
 
-        
+
+# if __name__=='__main__':
+#     t = Trie()
+#     t.insert("abc")
+#     t.insert("abcd")
+#     t.insert("abcde")
+#     t.insert("abcdef")
+#     t.insert("abcdefg")
+#     t.insert("abcdefgi")
+
+#     print(t.search("ab"))
