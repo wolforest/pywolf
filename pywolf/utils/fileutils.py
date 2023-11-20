@@ -46,7 +46,17 @@ def exists(file: str) -> bool:
     if not file:
         return False
 
-    if not os.path.exists(file):
-        return False
+    if os.path.exists(file):
+        return True
 
     return os.path.isfile(file)
+
+def count_lines(file: str) -> int:
+    if not exists(file):
+        return 0
+    
+    lines = 0
+    for _ in open(file):
+        lines += 1
+    
+    return lines
