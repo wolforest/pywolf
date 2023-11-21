@@ -3,68 +3,116 @@ import os
 import pywolf.utils.fileutils as f
 import pywolf.utils.pathutils as p
 
-class FileNode:
-    dir : str = ""
-    path: str = None
-    name: str = None
-    size: int = 0
-    rows: int = 0
-    level: int = -1
+class DirNode:
+    def __init__(self, parent: str, level: int, name: str=None) -> None:
+        self.parent = p.normalize(parent, removeFirst=False, strip=True)
+        self.level = level
 
-    def __init__(self, name: str, level: int=1, dir: str=None, ) -> None:
+        if name is None:
+            self.name = "root"
+            self.path = self.parent
+        else:
+            self.name = name
+            self.path = p.join(self.parent, name)
+        
+        self.fileChildren = set()
+        self.dirChildren = set()
+
+
+    def get_info(self) -> str:
+        #print("dir: level= ", self.level, "; name= ", self.name, "; dirs: ", len(self.dirChildren), "; files: ", len(self.fileChildren))
+        #print("|" + "----" * (self.level - 1) + self.name + "; files: " , len(self.fileChildren))
+        pass
+
+    def add_file(self, file) -> None:
+        self.fileChildren.add(file)
+    
+    def add_dir(self, dir) -> None:
+        self.dirChildren.add(dir)
+
+
+class FileNode:
+    def __init__(self, parent:DirNode, name: str) -> None:
         if not name:
             raise SyntaxError("File name can't be None")
-        
-        self.level = level
+
         self.name = name
-        self.__init_path()
+        self.parent = parent
+        self.path = os.path.join(parent.path, self.name)
     
+    def get_info(self) -> str:
+        #print("file: ", self.name)
+        num = self.parent.level
+        lines =  self.count_lines()
+
+        if lines < 200
+            return
+
+        print("|" +"----" * num + self.name + " lines: ", lines)
+
+    def count_lines(self) -> int:
+        count = 0
+        for line in open(self.path):
+            count += 1
+        
+        return count
+
     def count(self, countRowNumber=False, countLineLength=False) -> None:
         pass
 
-    
-    def __init_path(self, dir: str) -> None:
-
-        if not dir:
-            self.path = self.name
-        else:
-            self.dir = dir
-            self.path = p.join(dir, self.name)
-    
-        
-
+  
 class FileStructure:
-    baseDir: str = None
-    nodeList: list = []
-
-
-    def __init__(self, dir: str) -> None:
-        if not dir:
+    def __init__(self, path: str) -> None:
+        if not path:
             raise SyntaxError("Directory name can't be None")
         
-        if not f.exists(dir):
-            raise SystemError("Directory: " + dir + " doesn't exists")
+        if not f.exists(path):
+            raise SystemError("Directory: " + path + " doesn't exists")
         
-        self.baseDir = dir
+        self.root = DirNode(path, 1, None)
 
-    def scan(self, **args) -> list:
-        baseDirLen = len(self.baseDir)
+    def scan(self, node: DirNode=None) -> None:
+        if node is None:
+            node = self.root
 
-        for root, ds, fs in os.walk(self.baseDir):
-            for f in fs:
-                print("file: " , self.getLevel(root[baseDirLen:]) , " : " +  f)
-            
-            for d in ds: 
-                print("dir: " , self.getLevel(root[baseDirLen:]) , " : " + d)
+        for file in os.listdir(node.path):
+            self.__parse_file(node, file)
 
-    def getLevel(self, path) -> int:
-        if not path:
-            return 1
+    def traverse(self, node: DirNode=None):
+        if node is None:
+            node = self.root
+            node.get_info()
+
+        for file in node.fileChildren:
+            file.get_info()
+            pass
+
+        for dir in node.dirChildren:
+            dir.get_info()
+            self.traverse(dir)
+
+    def __parse_file(self, node: DirNode, file: str) -> None:
+        path = p.join(node.path, file)
+        if p.isdir(path):
+            dir = self.__add_dir(node, file)
+            self.scan(dir)
+        else:
+            self.__add_file(node, file)
+
+
+    def __add_dir(self, parent: DirNode, file: str) -> DirNode:
+        child = DirNode(parent.path, parent.level + 1, file)
+        parent.add_dir(child)
+
+        return child
+
+    def __add_file(self, parent: DirNode, file: str) -> FileNode:
+        child = FileNode(parent, file)
+        parent.add_file(child)
+
+        return child
         
-        path = p.strip(path)
-        arr = path.split(os.sep)
-
-        return len(arr) + 1
+    
 
 
     

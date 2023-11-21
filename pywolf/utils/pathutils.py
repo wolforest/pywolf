@@ -62,6 +62,8 @@ def join(*pathes: str) -> str:
 
         result += normalize(path)
     
+    return result
+    
 
 
 def dirname(file) -> str:
@@ -84,7 +86,7 @@ def extension(fileName: str, withoutDot=False, toLower=False) -> str:
 def isdir(fileName: str) -> bool:
     return os.path.isdir(fileName)
 
-def isFile(fileName: str) -> bool:
+def isfile(fileName: str) -> bool:
     return os.path.isfile(fileName)
 
 # if __name__ == '__main__':
