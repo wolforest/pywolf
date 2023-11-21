@@ -45,17 +45,20 @@ class FileNode:
         num = self.parent.level
         lines =  self.count_lines()
 
-        if lines < 200
+        if lines < 200:
             return
 
         print("|" +"----" * num + self.name + " lines: ", lines)
 
     def count_lines(self) -> int:
-        count = 0
-        for line in open(self.path):
-            count += 1
+        if self.count > 0:
+            return self.count
         
-        return count
+        self.count = 0
+        for line in open(self.path):
+            self.count += 1
+        
+        return self.count
 
     def count(self, countRowNumber=False, countLineLength=False) -> None:
         pass
