@@ -21,7 +21,7 @@ class DirNode:
 
     def get_info(self) -> str:
         #print("dir: level= ", self.level, "; name= ", self.name, "; dirs: ", len(self.dirChildren), "; files: ", len(self.fileChildren))
-        #print("|" + "----" * (self.level - 1) + self.name + "; files: " , len(self.fileChildren))
+        print("  " * (self.level - 1) + "|--" + self.name + " [subDirs: ", len(self.dirChildren),  "; files: " , len(self.fileChildren), "]")
         pass
 
     def add_file(self, file) -> None:
@@ -32,12 +32,15 @@ class DirNode:
 
 
 class FileNode:
+    fileCount: int = 0
+
     def __init__(self, parent:DirNode, name: str) -> None:
         if not name:
             raise SyntaxError("File name can't be None")
 
         self.name = name
         self.parent = parent
+        self.lineNumber = 0
         self.path = os.path.join(parent.path, self.name)
     
     def get_info(self) -> str:
@@ -45,20 +48,20 @@ class FileNode:
         num = self.parent.level
         lines =  self.count_lines()
 
-        if lines < 200:
+        if lines < 300:
             return
 
-        print("|" +"----" * num + self.name + " lines: ", lines)
+        FileNode.fileCount += 1
+        print(self.fileCount, "|" +"----" * num + self.name + " lines: ", lines)
 
     def count_lines(self) -> int:
-        if self.count > 0:
-            return self.count
+        if self.lineNumber > 0:
+            return self.lineNumber
         
-        self.count = 0
         for line in open(self.path):
-            self.count += 1
+            self.lineNumber += 1
         
-        return self.count
+        return self.lineNumber
 
     def count(self, countRowNumber=False, countLineLength=False) -> None:
         pass
@@ -86,9 +89,8 @@ class FileStructure:
             node = self.root
             node.get_info()
 
-        for file in node.fileChildren:
-            file.get_info()
-            pass
+        #for file in node.fileChildren:
+            #file.get_info()
 
         for dir in node.dirChildren:
             dir.get_info()
